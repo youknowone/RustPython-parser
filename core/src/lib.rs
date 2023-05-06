@@ -8,7 +8,7 @@ pub mod marshal;
 mod mode;
 
 pub use bytecode::*;
-pub use error::BaseError;
+pub use error::{BaseError, LocatedError};
 pub use location::Location;
 pub use mode::Mode;
 
