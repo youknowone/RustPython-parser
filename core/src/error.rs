@@ -5,7 +5,7 @@ use std::fmt::Display;
 #[derive(Debug, PartialEq, Eq)]
 pub struct BaseError<T> {
     pub error: T,
-    pub location: TextSize,
+    pub offset: TextSize,
     pub source_path: String,
 }
 
@@ -35,7 +35,7 @@ where
             f,
             "{} at byte offset {}",
             &self.error,
-            u32::from(self.location)
+            u32::from(self.offset)
         )
     }
 }
@@ -51,7 +51,7 @@ impl<T> BaseError<T> {
     {
         Self {
             error: obj.error.into(),
-            location: obj.location,
+            offset: obj.offset,
             source_path: obj.source_path,
         }
     }
