@@ -58,42 +58,50 @@ fn cached(py: Python, s: &str) -> Py<PyString> {
 impl ToPyo3Ast for crate::Identifier {
     #[inline]
     fn to_pyo3_ast(&self, py: Python) -> PyResult<Py<PyAny>> {
-        let s = self.as_str();
-        Ok(if s.len() <= 12 {
-            let py = unsafe { std::mem::transmute(py) };
-            cached(py, s).to_object(py)
-            // PyString::new(py, s).to_object(py)
-        } else {
-            self.as_str().to_object(py)
-        })
+        // let s = self.as_str();
+        Ok(
+        // if s.len() <= 12 {
+        //     let py = unsafe { std::mem::transmute(py) };
+        //     cached(py, s).to_object(py)
+        //     // PyString::new(py, s).to_object(py)
+        // } else {
+            // self.as_str().to_object(py)
+        // }
+        py.None()
+        )
     }
 }
 
 impl ToPyo3Ast for crate::String {
     #[inline]
     fn to_pyo3_ast(&self, py: Python) -> PyResult<Py<PyAny>> {
-        let s = self.as_str();
-        Ok(if s.len() <= 12 {
-            let py = unsafe { std::mem::transmute(py) };
-            cached(py, s).to_object(py)
-            // PyString::new(py, s).to_object(py)
-        } else {
-            self.as_str().to_object(py)
-        })
+        // let s = self.as_str();
+        Ok(
+        // if s.len() <= 12 {
+        //     let py = unsafe { std::mem::transmute(py) };
+        //     cached(py, s).to_object(py)
+        //     // PyString::new(py, s).to_object(py)
+        // } else {
+            // self.as_str().to_object(py)
+        // }
+        py.None()
+        )
     }
 }
 
 impl ToPyo3Ast for crate::Int {
     #[inline]
     fn to_pyo3_ast(&self, py: Python) -> PyResult<Py<PyAny>> {
-        Ok((self.to_u32()).to_object(py))
+        Ok(py.None())
+        // Ok((self.to_u32()).to_object(py))
     }
 }
 
 impl ToPyo3Ast for bool {
     #[inline]
     fn to_pyo3_ast(&self, py: Python) -> PyResult<Py<PyAny>> {
-        Ok((*self as u32).to_object(py))
+        Ok(py.None())
+        // Ok((*self as u32).to_object(py))
     }
 }
 
@@ -102,15 +110,15 @@ impl ToPyo3Ast for crate::Constant {
     fn to_pyo3_ast(&self, py: Python) -> PyResult<Py<PyAny>> {
         let value = match self {
             crate::Constant::None => py.None(),
-            crate::Constant::Bool(bool) => bool.to_object(py),
-            crate::Constant::Str(string) => string.to_object(py),
-            crate::Constant::Bytes(bytes) => PyBytes::new(py, bytes).into(),
-            crate::Constant::Int(int) => int.to_object(py),
+            crate::Constant::Bool(bool) => bool.to_pyo3_ast(py)?,
+            crate::Constant::Str(string) => py.None(),
+            crate::Constant::Bytes(bytes) => py.None(),
+            crate::Constant::Int(int) => py.None(),
             crate::Constant::Tuple(elts) => {
                 let elts: PyResult<Vec<_>> = elts.iter().map(|c| c.to_pyo3_ast(py)).collect();
                 PyTuple::new(py, elts?).into()
             }
-            crate::Constant::Float(f64) => f64.to_object(py),
+            crate::Constant::Float(f64) => py.None(),
             crate::Constant::Complex { real, imag } => Complex64::new(*real, *imag).to_object(py),
             crate::Constant::Ellipsis => py.Ellipsis(),
         };

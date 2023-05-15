@@ -50,9 +50,9 @@ for path, txt in files.items():
 
     # break
     try:
-        p = timeit.timeit(lambda: dump(py_ast.parse(txt)), number=10)
-        r1 = timeit.timeit(lambda: dump(rust_ast.parse(txt)), number=10)
-        r2 = timeit.timeit(lambda: dump(rust_ast.parse_wrap(txt)), number=10)
+        p = timeit.timeit(lambda: py_ast.parse(txt), number=10)
+        r1 = timeit.timeit(lambda: rust_ast.parse(txt), number=10)
+        r2 = timeit.timeit(lambda: rust_ast.parse_wrap(txt), number=10)
     except Exception as e:
         print('error:', path, e)
         continue

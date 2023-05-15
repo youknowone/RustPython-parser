@@ -16,14 +16,14 @@ impl ToPyo3Ast for crate::ranged::Mod {
 impl ToPyo3Ast for crate::ranged::ModModule {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ModModule::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.body.to_pyo3_ast(_py)?,
                 self.type_ignores.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -31,8 +31,8 @@ impl ToPyo3Ast for crate::ranged::ModModule {
 impl ToPyo3Ast for crate::ranged::ModInteractive {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ModInteractive::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.body.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.body.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -40,8 +40,8 @@ impl ToPyo3Ast for crate::ranged::ModInteractive {
 impl ToPyo3Ast for crate::ranged::ModExpression {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ModExpression::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.body.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.body.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -49,14 +49,14 @@ impl ToPyo3Ast for crate::ranged::ModExpression {
 impl ToPyo3Ast for crate::ranged::ModFunctionType {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ModFunctionType::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.argtypes.to_pyo3_ast(_py)?,
                 self.returns.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -99,7 +99,7 @@ impl ToPyo3Ast for crate::ranged::Stmt {
 impl ToPyo3Ast for crate::ranged::StmtFunctionDef {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtFunctionDef::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.name.to_pyo3_ast(_py)?,
@@ -109,8 +109,8 @@ impl ToPyo3Ast for crate::ranged::StmtFunctionDef {
                 self.returns.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -118,7 +118,7 @@ impl ToPyo3Ast for crate::ranged::StmtFunctionDef {
 impl ToPyo3Ast for crate::ranged::StmtAsyncFunctionDef {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtAsyncFunctionDef::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.name.to_pyo3_ast(_py)?,
@@ -128,8 +128,8 @@ impl ToPyo3Ast for crate::ranged::StmtAsyncFunctionDef {
                 self.returns.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -137,7 +137,7 @@ impl ToPyo3Ast for crate::ranged::StmtAsyncFunctionDef {
 impl ToPyo3Ast for crate::ranged::StmtClassDef {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtClassDef::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.name.to_pyo3_ast(_py)?,
@@ -146,8 +146,8 @@ impl ToPyo3Ast for crate::ranged::StmtClassDef {
                 self.body.to_pyo3_ast(_py)?,
                 self.decorator_list.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -155,8 +155,8 @@ impl ToPyo3Ast for crate::ranged::StmtClassDef {
 impl ToPyo3Ast for crate::ranged::StmtReturn {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtReturn::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.value.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.value.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -164,8 +164,8 @@ impl ToPyo3Ast for crate::ranged::StmtReturn {
 impl ToPyo3Ast for crate::ranged::StmtDelete {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtDelete::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.targets.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.targets.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -173,15 +173,15 @@ impl ToPyo3Ast for crate::ranged::StmtDelete {
 impl ToPyo3Ast for crate::ranged::StmtAssign {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtAssign::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.targets.to_pyo3_ast(_py)?,
                 self.value.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -189,15 +189,15 @@ impl ToPyo3Ast for crate::ranged::StmtAssign {
 impl ToPyo3Ast for crate::ranged::StmtAugAssign {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtAugAssign::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.target.to_pyo3_ast(_py)?,
                 self.op.to_pyo3_ast(_py)?,
                 self.value.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -205,7 +205,7 @@ impl ToPyo3Ast for crate::ranged::StmtAugAssign {
 impl ToPyo3Ast for crate::ranged::StmtAnnAssign {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtAnnAssign::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.target.to_pyo3_ast(_py)?,
@@ -213,8 +213,8 @@ impl ToPyo3Ast for crate::ranged::StmtAnnAssign {
                 self.value.to_pyo3_ast(_py)?,
                 self.simple.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -222,7 +222,7 @@ impl ToPyo3Ast for crate::ranged::StmtAnnAssign {
 impl ToPyo3Ast for crate::ranged::StmtFor {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtFor::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.target.to_pyo3_ast(_py)?,
@@ -231,8 +231,8 @@ impl ToPyo3Ast for crate::ranged::StmtFor {
                 self.orelse.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -240,7 +240,7 @@ impl ToPyo3Ast for crate::ranged::StmtFor {
 impl ToPyo3Ast for crate::ranged::StmtAsyncFor {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtAsyncFor::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.target.to_pyo3_ast(_py)?,
@@ -249,8 +249,8 @@ impl ToPyo3Ast for crate::ranged::StmtAsyncFor {
                 self.orelse.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -258,15 +258,15 @@ impl ToPyo3Ast for crate::ranged::StmtAsyncFor {
 impl ToPyo3Ast for crate::ranged::StmtWhile {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtWhile::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.test.to_pyo3_ast(_py)?,
                 self.body.to_pyo3_ast(_py)?,
                 self.orelse.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -274,15 +274,15 @@ impl ToPyo3Ast for crate::ranged::StmtWhile {
 impl ToPyo3Ast for crate::ranged::StmtIf {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtIf::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.test.to_pyo3_ast(_py)?,
                 self.body.to_pyo3_ast(_py)?,
                 self.orelse.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -290,15 +290,15 @@ impl ToPyo3Ast for crate::ranged::StmtIf {
 impl ToPyo3Ast for crate::ranged::StmtWith {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtWith::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.items.to_pyo3_ast(_py)?,
                 self.body.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -306,15 +306,15 @@ impl ToPyo3Ast for crate::ranged::StmtWith {
 impl ToPyo3Ast for crate::ranged::StmtAsyncWith {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtAsyncWith::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.items.to_pyo3_ast(_py)?,
                 self.body.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -322,11 +322,11 @@ impl ToPyo3Ast for crate::ranged::StmtAsyncWith {
 impl ToPyo3Ast for crate::ranged::StmtMatch {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtMatch::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.subject.to_pyo3_ast(_py)?, self.cases.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -334,11 +334,11 @@ impl ToPyo3Ast for crate::ranged::StmtMatch {
 impl ToPyo3Ast for crate::ranged::StmtRaise {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtRaise::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.exc.to_pyo3_ast(_py)?, self.cause.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -346,7 +346,7 @@ impl ToPyo3Ast for crate::ranged::StmtRaise {
 impl ToPyo3Ast for crate::ranged::StmtTry {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtTry::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.body.to_pyo3_ast(_py)?,
@@ -354,8 +354,8 @@ impl ToPyo3Ast for crate::ranged::StmtTry {
                 self.orelse.to_pyo3_ast(_py)?,
                 self.finalbody.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -363,7 +363,7 @@ impl ToPyo3Ast for crate::ranged::StmtTry {
 impl ToPyo3Ast for crate::ranged::StmtTryStar {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtTryStar::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.body.to_pyo3_ast(_py)?,
@@ -371,8 +371,8 @@ impl ToPyo3Ast for crate::ranged::StmtTryStar {
                 self.orelse.to_pyo3_ast(_py)?,
                 self.finalbody.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -380,11 +380,11 @@ impl ToPyo3Ast for crate::ranged::StmtTryStar {
 impl ToPyo3Ast for crate::ranged::StmtAssert {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtAssert::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.test.to_pyo3_ast(_py)?, self.msg.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -392,8 +392,8 @@ impl ToPyo3Ast for crate::ranged::StmtAssert {
 impl ToPyo3Ast for crate::ranged::StmtImport {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtImport::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.names.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.names.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -401,15 +401,15 @@ impl ToPyo3Ast for crate::ranged::StmtImport {
 impl ToPyo3Ast for crate::ranged::StmtImportFrom {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtImportFrom::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.module.to_pyo3_ast(_py)?,
                 self.names.to_pyo3_ast(_py)?,
                 self.level.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -417,8 +417,8 @@ impl ToPyo3Ast for crate::ranged::StmtImportFrom {
 impl ToPyo3Ast for crate::ranged::StmtGlobal {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtGlobal::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.names.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.names.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -426,8 +426,8 @@ impl ToPyo3Ast for crate::ranged::StmtGlobal {
 impl ToPyo3Ast for crate::ranged::StmtNonlocal {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtNonlocal::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.names.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.names.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -435,8 +435,8 @@ impl ToPyo3Ast for crate::ranged::StmtNonlocal {
 impl ToPyo3Ast for crate::ranged::StmtExpr {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtExpr::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.value.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.value.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -444,8 +444,8 @@ impl ToPyo3Ast for crate::ranged::StmtExpr {
 impl ToPyo3Ast for crate::ranged::StmtPass {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtPass::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, ())?;
-        Ok(instance.into())
+        let instance = (_py, ());
+        Ok(_py.None())
     }
 }
 
@@ -453,8 +453,8 @@ impl ToPyo3Ast for crate::ranged::StmtPass {
 impl ToPyo3Ast for crate::ranged::StmtBreak {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtBreak::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, ())?;
-        Ok(instance.into())
+        let instance = (_py, ());
+        Ok(_py.None())
     }
 }
 
@@ -462,8 +462,8 @@ impl ToPyo3Ast for crate::ranged::StmtBreak {
 impl ToPyo3Ast for crate::ranged::StmtContinue {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::StmtContinue::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, ())?;
-        Ok(instance.into())
+        let instance = (_py, ());
+        Ok(_py.None())
     }
 }
 
@@ -506,11 +506,11 @@ impl ToPyo3Ast for crate::ranged::Expr {
 impl ToPyo3Ast for crate::ranged::ExprBoolOp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprBoolOp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.op.to_pyo3_ast(_py)?, self.values.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -518,11 +518,11 @@ impl ToPyo3Ast for crate::ranged::ExprBoolOp {
 impl ToPyo3Ast for crate::ranged::ExprNamedExpr {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprNamedExpr::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.target.to_pyo3_ast(_py)?, self.value.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -530,15 +530,15 @@ impl ToPyo3Ast for crate::ranged::ExprNamedExpr {
 impl ToPyo3Ast for crate::ranged::ExprBinOp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprBinOp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.left.to_pyo3_ast(_py)?,
                 self.op.to_pyo3_ast(_py)?,
                 self.right.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -546,11 +546,11 @@ impl ToPyo3Ast for crate::ranged::ExprBinOp {
 impl ToPyo3Ast for crate::ranged::ExprUnaryOp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprUnaryOp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.op.to_pyo3_ast(_py)?, self.operand.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -558,11 +558,11 @@ impl ToPyo3Ast for crate::ranged::ExprUnaryOp {
 impl ToPyo3Ast for crate::ranged::ExprLambda {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprLambda::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.args.to_pyo3_ast(_py)?, self.body.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -570,15 +570,15 @@ impl ToPyo3Ast for crate::ranged::ExprLambda {
 impl ToPyo3Ast for crate::ranged::ExprIfExp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprIfExp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.test.to_pyo3_ast(_py)?,
                 self.body.to_pyo3_ast(_py)?,
                 self.orelse.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -586,11 +586,11 @@ impl ToPyo3Ast for crate::ranged::ExprIfExp {
 impl ToPyo3Ast for crate::ranged::ExprDict {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprDict::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.keys.to_pyo3_ast(_py)?, self.values.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -598,8 +598,8 @@ impl ToPyo3Ast for crate::ranged::ExprDict {
 impl ToPyo3Ast for crate::ranged::ExprSet {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprSet::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.elts.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.elts.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -607,14 +607,14 @@ impl ToPyo3Ast for crate::ranged::ExprSet {
 impl ToPyo3Ast for crate::ranged::ExprListComp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprListComp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.elt.to_pyo3_ast(_py)?,
                 self.generators.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -622,14 +622,14 @@ impl ToPyo3Ast for crate::ranged::ExprListComp {
 impl ToPyo3Ast for crate::ranged::ExprSetComp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprSetComp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.elt.to_pyo3_ast(_py)?,
                 self.generators.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -637,15 +637,15 @@ impl ToPyo3Ast for crate::ranged::ExprSetComp {
 impl ToPyo3Ast for crate::ranged::ExprDictComp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprDictComp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.key.to_pyo3_ast(_py)?,
                 self.value.to_pyo3_ast(_py)?,
                 self.generators.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -653,14 +653,14 @@ impl ToPyo3Ast for crate::ranged::ExprDictComp {
 impl ToPyo3Ast for crate::ranged::ExprGeneratorExp {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprGeneratorExp::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.elt.to_pyo3_ast(_py)?,
                 self.generators.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -668,8 +668,8 @@ impl ToPyo3Ast for crate::ranged::ExprGeneratorExp {
 impl ToPyo3Ast for crate::ranged::ExprAwait {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprAwait::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.value.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.value.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -677,8 +677,8 @@ impl ToPyo3Ast for crate::ranged::ExprAwait {
 impl ToPyo3Ast for crate::ranged::ExprYield {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprYield::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.value.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.value.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -686,8 +686,8 @@ impl ToPyo3Ast for crate::ranged::ExprYield {
 impl ToPyo3Ast for crate::ranged::ExprYieldFrom {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprYieldFrom::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.value.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.value.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -695,15 +695,15 @@ impl ToPyo3Ast for crate::ranged::ExprYieldFrom {
 impl ToPyo3Ast for crate::ranged::ExprCompare {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprCompare::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.left.to_pyo3_ast(_py)?,
                 self.ops.to_pyo3_ast(_py)?,
                 self.comparators.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -711,15 +711,15 @@ impl ToPyo3Ast for crate::ranged::ExprCompare {
 impl ToPyo3Ast for crate::ranged::ExprCall {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprCall::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.func.to_pyo3_ast(_py)?,
                 self.args.to_pyo3_ast(_py)?,
                 self.keywords.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -727,15 +727,15 @@ impl ToPyo3Ast for crate::ranged::ExprCall {
 impl ToPyo3Ast for crate::ranged::ExprFormattedValue {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprFormattedValue::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.value.to_pyo3_ast(_py)?,
                 self.conversion.to_pyo3_ast(_py)?,
                 self.format_spec.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -743,8 +743,8 @@ impl ToPyo3Ast for crate::ranged::ExprFormattedValue {
 impl ToPyo3Ast for crate::ranged::ExprJoinedStr {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprJoinedStr::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.values.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.values.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -752,11 +752,11 @@ impl ToPyo3Ast for crate::ranged::ExprJoinedStr {
 impl ToPyo3Ast for crate::ranged::ExprConstant {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprConstant::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.value.to_pyo3_ast(_py)?, self.kind.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -764,15 +764,15 @@ impl ToPyo3Ast for crate::ranged::ExprConstant {
 impl ToPyo3Ast for crate::ranged::ExprAttribute {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprAttribute::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.value.to_pyo3_ast(_py)?,
                 self.attr.to_pyo3_ast(_py)?,
                 self.ctx.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -780,15 +780,15 @@ impl ToPyo3Ast for crate::ranged::ExprAttribute {
 impl ToPyo3Ast for crate::ranged::ExprSubscript {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprSubscript::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.value.to_pyo3_ast(_py)?,
                 self.slice.to_pyo3_ast(_py)?,
                 self.ctx.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -796,11 +796,11 @@ impl ToPyo3Ast for crate::ranged::ExprSubscript {
 impl ToPyo3Ast for crate::ranged::ExprStarred {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprStarred::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.value.to_pyo3_ast(_py)?, self.ctx.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -808,8 +808,8 @@ impl ToPyo3Ast for crate::ranged::ExprStarred {
 impl ToPyo3Ast for crate::ranged::ExprName {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprName::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.id.to_pyo3_ast(_py)?, self.ctx.to_pyo3_ast(_py)?))?;
-        Ok(instance.into())
+        let instance = (_py, (self.id.to_pyo3_ast(_py)?, self.ctx.to_pyo3_ast(_py)?));
+        Ok(_py.None())
     }
 }
 
@@ -817,11 +817,11 @@ impl ToPyo3Ast for crate::ranged::ExprName {
 impl ToPyo3Ast for crate::ranged::ExprList {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprList::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.elts.to_pyo3_ast(_py)?, self.ctx.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -829,11 +829,11 @@ impl ToPyo3Ast for crate::ranged::ExprList {
 impl ToPyo3Ast for crate::ranged::ExprTuple {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprTuple::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.elts.to_pyo3_ast(_py)?, self.ctx.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -841,15 +841,15 @@ impl ToPyo3Ast for crate::ranged::ExprTuple {
 impl ToPyo3Ast for crate::ranged::ExprSlice {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::ExprSlice::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.lower.to_pyo3_ast(_py)?,
                 self.upper.to_pyo3_ast(_py)?,
                 self.step.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -956,7 +956,7 @@ impl ToPyo3Ast for crate::ranged::Cmpop {
 impl ToPyo3Ast for crate::ranged::Comprehension {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::Comprehension::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.target.to_pyo3_ast(_py)?,
@@ -964,8 +964,8 @@ impl ToPyo3Ast for crate::ranged::Comprehension {
                 self.ifs.to_pyo3_ast(_py)?,
                 self.is_async.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -984,15 +984,15 @@ impl ToPyo3Ast for crate::ranged::ExcepthandlerExceptHandler {
         let class = ranged::ExcepthandlerExceptHandler::py_type_cell()
             .get()
             .unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.type_.to_pyo3_ast(_py)?,
                 self.name.to_pyo3_ast(_py)?,
                 self.body.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1000,7 +1000,7 @@ impl ToPyo3Ast for crate::ranged::ExcepthandlerExceptHandler {
 impl ToPyo3Ast for crate::ranged::Arguments {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::Arguments::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.posonlyargs.to_pyo3_ast(_py)?,
@@ -1011,8 +1011,8 @@ impl ToPyo3Ast for crate::ranged::Arguments {
                 self.kwarg.to_pyo3_ast(_py)?,
                 self.defaults.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1020,15 +1020,15 @@ impl ToPyo3Ast for crate::ranged::Arguments {
 impl ToPyo3Ast for crate::ranged::Arg {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::Arg::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.arg.to_pyo3_ast(_py)?,
                 self.annotation.to_pyo3_ast(_py)?,
                 self.type_comment.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1036,11 +1036,11 @@ impl ToPyo3Ast for crate::ranged::Arg {
 impl ToPyo3Ast for crate::ranged::Keyword {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::Keyword::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.arg.to_pyo3_ast(_py)?, self.value.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1048,11 +1048,11 @@ impl ToPyo3Ast for crate::ranged::Keyword {
 impl ToPyo3Ast for crate::ranged::Alias {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::Alias::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.name.to_pyo3_ast(_py)?, self.asname.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1060,14 +1060,14 @@ impl ToPyo3Ast for crate::ranged::Alias {
 impl ToPyo3Ast for crate::ranged::Withitem {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::Withitem::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.context_expr.to_pyo3_ast(_py)?,
                 self.optional_vars.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1075,15 +1075,15 @@ impl ToPyo3Ast for crate::ranged::Withitem {
 impl ToPyo3Ast for crate::ranged::MatchCase {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::MatchCase::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.pattern.to_pyo3_ast(_py)?,
                 self.guard.to_pyo3_ast(_py)?,
                 self.body.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1107,8 +1107,8 @@ impl ToPyo3Ast for crate::ranged::Pattern {
 impl ToPyo3Ast for crate::ranged::PatternMatchValue {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchValue::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.value.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.value.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -1116,8 +1116,8 @@ impl ToPyo3Ast for crate::ranged::PatternMatchValue {
 impl ToPyo3Ast for crate::ranged::PatternMatchSingleton {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchSingleton::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.value.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.value.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -1125,8 +1125,8 @@ impl ToPyo3Ast for crate::ranged::PatternMatchSingleton {
 impl ToPyo3Ast for crate::ranged::PatternMatchSequence {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchSequence::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.patterns.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.patterns.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -1134,15 +1134,15 @@ impl ToPyo3Ast for crate::ranged::PatternMatchSequence {
 impl ToPyo3Ast for crate::ranged::PatternMatchMapping {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchMapping::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.keys.to_pyo3_ast(_py)?,
                 self.patterns.to_pyo3_ast(_py)?,
                 self.rest.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1150,7 +1150,7 @@ impl ToPyo3Ast for crate::ranged::PatternMatchMapping {
 impl ToPyo3Ast for crate::ranged::PatternMatchClass {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchClass::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (
                 self.cls.to_pyo3_ast(_py)?,
@@ -1158,8 +1158,8 @@ impl ToPyo3Ast for crate::ranged::PatternMatchClass {
                 self.kwd_attrs.to_pyo3_ast(_py)?,
                 self.kwd_patterns.to_pyo3_ast(_py)?,
             ),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1167,8 +1167,8 @@ impl ToPyo3Ast for crate::ranged::PatternMatchClass {
 impl ToPyo3Ast for crate::ranged::PatternMatchStar {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchStar::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.name.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.name.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -1176,11 +1176,11 @@ impl ToPyo3Ast for crate::ranged::PatternMatchStar {
 impl ToPyo3Ast for crate::ranged::PatternMatchAs {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchAs::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.pattern.to_pyo3_ast(_py)?, self.name.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }
 
@@ -1188,8 +1188,8 @@ impl ToPyo3Ast for crate::ranged::PatternMatchAs {
 impl ToPyo3Ast for crate::ranged::PatternMatchOr {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::PatternMatchOr::py_type_cell().get().unwrap();
-        let instance = class.call1(_py, (self.patterns.to_pyo3_ast(_py)?,))?;
-        Ok(instance.into())
+        let instance = (_py, (self.patterns.to_pyo3_ast(_py)?,));
+        Ok(_py.None())
     }
 }
 
@@ -1206,10 +1206,10 @@ impl ToPyo3Ast for crate::ranged::TypeIgnore {
 impl ToPyo3Ast for crate::ranged::TypeIgnoreTypeIgnore {
     fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {
         let class = ranged::TypeIgnoreTypeIgnore::py_type_cell().get().unwrap();
-        let instance = class.call1(
+        let instance = (
             _py,
             (self.lineno.to_pyo3_ast(_py)?, self.tag.to_pyo3_ast(_py)?),
-        )?;
-        Ok(instance.into())
+        );
+        Ok(_py.None())
     }
 }

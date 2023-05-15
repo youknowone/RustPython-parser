@@ -737,7 +737,7 @@ class ToPyo3AstVisitor(EmitVisitor):
             impl ToPyo3Ast for crate::{self.namespace}::{rust_name} {{
                 fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {{
                     let class = ranged::{rust_name}::py_type_cell().get().unwrap();
-                    let instance = class.call1(_py, (
+                    let instance = (_py, (
             """,
             0,
         )
@@ -745,8 +745,8 @@ class ToPyo3AstVisitor(EmitVisitor):
             self.emit(f"""self.{field.name}.to_pyo3_ast(_py)?,""", depth + 1)
         self.emit(
             """
-                    ))?;
-                    Ok(instance.into())
+                    ));
+                    Ok(_py.None())
                 }
             }
             """,
@@ -800,7 +800,7 @@ class ToPyo3AstVisitor(EmitVisitor):
             impl ToPyo3Ast for crate::{self.namespace}::{parent}{cons.name} {{
                 fn to_pyo3_ast(&self, _py: Python) -> PyResult<Py<PyAny>> {{
                     let class = ranged::{parent}{cons.name}::py_type_cell().get().unwrap();
-                    let instance = class.call1(_py, (
+                    let instance = (_py, (
             """,
             depth,
         )
@@ -811,8 +811,8 @@ class ToPyo3AstVisitor(EmitVisitor):
             )
         self.emit(
             """
-                    ))?;
-                    Ok(instance.into())
+                    ));
+                    Ok(_py.None())
                 }
             }
             """,
